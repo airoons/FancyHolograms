@@ -248,6 +248,10 @@ public abstract class Hologram {
         return isShown(player.getUniqueId());
     }
 
+    public final boolean isSaved() {
+        return this.data.isSaved();
+    }
+
     /**
      * Method to calculate the distance between the hologram's location and another location.
      * Returns NaN if the hologram doesn't have a location, or if the worlds do not match.

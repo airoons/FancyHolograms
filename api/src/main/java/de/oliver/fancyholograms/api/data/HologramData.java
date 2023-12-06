@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public final class HologramData implements Data {
 
+    public static final boolean DEFAULT_IS_SAVED = true;
 
     @NotNull
     private final String name;
@@ -20,6 +21,8 @@ public final class HologramData implements Data {
 
     @NotNull
     private final Data typeData;
+
+    private boolean isSaved = DEFAULT_IS_SAVED;
 
 
     /**
@@ -46,6 +49,7 @@ public final class HologramData implements Data {
         this.displayData = (DisplayHologramData) other.getDisplayData().copy();
         this.type = other.getType();
         this.typeData = other.getTypeData().copy();
+        this.isSaved = other.isSaved();
     }
 
     @Override
@@ -76,6 +80,24 @@ public final class HologramData implements Data {
 
     public @NotNull Data getTypeData() {
         return typeData;
+    }
+
+    /**
+     * Returns the saving state of this HologramData.
+     *
+     * @return true if the hologram will be saved, false otherwise
+     */
+    public boolean isSaved() {
+        return isSaved;
+    }
+
+    /**
+     * Sets the saving state of this HologramData.
+     *
+     * @param saved the new saving state for the hologram
+     */
+    public void setSaved(boolean saved) {
+        this.isSaved = saved;
     }
 
     /**

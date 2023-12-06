@@ -119,7 +119,12 @@ public final class HologramManagerImpl implements HologramManager {
             return;
         }
 
-        FancyHolograms.get().getHologramsConfig().writeHolograms(HologramsConfig.HOLOGRAMS_CONFIG_FILE, getHolograms());
+        FancyHolograms.get().getHologramsConfig().writeHolograms(
+                HologramsConfig.HOLOGRAMS_CONFIG_FILE,
+                getHolograms().stream()
+                        .filter(Hologram::isSaved)
+                        .toList()
+        );
     }
 
     public void loadHolograms() {
