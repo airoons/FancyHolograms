@@ -26,7 +26,7 @@ public class RemoveCMD implements Subcommand {
             return false;
         }
 
-        hologram.hideHologram(Bukkit.getOnlinePlayers());
+        FancyHolograms.get().getScheduler().runTaskAsynchronously(() -> hologram.hideHologram(Bukkit.getOnlinePlayers()));
         hologram.deleteHologram();
 
         FancyHolograms.get().getHologramsManager().removeHologram(hologram);

@@ -36,12 +36,17 @@ public class FlatFileHologramStorage implements HologramStorage {
 
     @Override
     public void save(Hologram hologram) {
+        if (!hologram.getData().isSaved())
+            return;
+
         YamlConfiguration config = YamlConfiguration.loadConfiguration(HOLOGRAMS_CONFIG_FILE);
         writeHologram(config, hologram, true);
     }
 
     @Override
     public void delete(Hologram hologram) {
+        if (!hologram.getData().isSaved())
+            return;
         YamlConfiguration config = YamlConfiguration.loadConfiguration(HOLOGRAMS_CONFIG_FILE);
         config.set("holograms." + hologram.getData().getName(), null);
         saveConfig(config);
@@ -124,6 +129,9 @@ public class FlatFileHologramStorage implements HologramStorage {
     }
 
     private void writeHologram(YamlConfiguration config, Hologram hologram, boolean save) {
+        if (!hologram.getData().isSaved())
+            return;
+
         @NotNull ConfigurationSection section;
         if (!config.isConfigurationSection("holograms")) {
             section = config.createSection("holograms");
